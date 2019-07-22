@@ -1,5 +1,7 @@
 # Chatwork PHP API client library
 
+[![Build Status](https://travis-ci.org/sun-asterisk-research/chatwork-php.svg?branch=master)](https://travis-ci.org/sun-asterisk-research/chatwork-php)
+
 ## Requirement
 
 - PHP >= 7.0
