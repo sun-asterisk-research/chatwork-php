@@ -9,5 +9,15 @@
     "require-dev": {
         "phpunit/phpunit": "^8.2"
     },
-    "license": "MIT"
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "SunAsterisk\\Chatwork\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "classmap": [
+            "tests/"
+        ]
+    }
 }
