@@ -6,6 +6,9 @@ use GuzzleHttp\Client;
 use SunAsterisk\Chatwork\Auth\Auth;
 use function GuzzleHttp\json_decode;
 
+/**
+ * @method array me()
+ */
 class Chatwork
 {
     /** @Client */
