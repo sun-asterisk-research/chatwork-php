@@ -8,7 +8,7 @@ class MyTest extends TestCase
 {
     protected $response;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->response = $this->getMockResponse('my');
     }
@@ -25,4 +25,14 @@ class MyTest extends TestCase
         $this->assertEquals($status, $this->response['status']);
     }
 
+    public function testTasks()
+    {
+        $api = Mockery::mock(ChatWork::class);
+        $api->shouldReceive('get')
+            ->with('my/tasks')
+            ->andReturn($this->response['tasks']);
+
+        $task = (new My($api))->tasks();
+        $this->assertEquals($task, $this->response['tasks']);
+    }
 }
