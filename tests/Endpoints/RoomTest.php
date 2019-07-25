@@ -79,4 +79,18 @@ class RoomTest extends TestCase
         $this->assertEquals($message, $response);
 
     }
+
+    public function testMarkMessageAsUnRead(){
+        $message_id = 123456;
+        $response = $this->getMockResponse('rooms/markMessageAsUnReadResponse');
+        $api = Mockery::mock(Chatwork::class);
+        $api->shouldReceive('put')
+            ->with("rooms/{$this->room_id}/messages/unread", [
+                'message_id' => '123456'
+            ])
+            ->andReturn($response);
+
+        $message = (new Rooms($api))->markMessageAsUnRead($this->room_id, $message_id);
+        $this->assertEquals($message, $response);
+    }
 }

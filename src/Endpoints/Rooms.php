@@ -54,4 +54,11 @@ class Rooms extends Endpoint
             ]);
     }
 
+    public function markMessageAsUnRead($room_id, $message_id)
+    {
+        return $this->api->put("rooms/{$room_id}/messages/unread", [
+            'message_id' => $message_id
+        ]);
+    }
+
 }
