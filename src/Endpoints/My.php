@@ -11,4 +11,8 @@ class My extends Endpoint
         return $this->api->get('my/status');
     }
 
+    public function tasks()
+    {
+        return $this->api->get('my/tasks');
+    }
 }
