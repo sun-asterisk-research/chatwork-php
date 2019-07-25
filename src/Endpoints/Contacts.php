@@ -1,6 +1,5 @@
 <?php
 
-
 namespace SunAsterisk\Chatwork\Endpoints;
 
 class Contacts extends Endpoint
