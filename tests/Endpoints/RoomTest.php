@@ -50,4 +50,33 @@ class RoomTest extends TestCase
         $message = (new Rooms($api))->sendMessageToAll($this->room_id, $body);
         $this->assertEquals($message, $response);
     }
+
+    public function testMarkMessageAsReadWithNoMessageID()
+    {
+        $response = $this->getMockResponse('rooms/markMessageAsReadResponse');
+        $api = Mockery::mock(Chatwork::class);
+        $api->shouldReceive('put')
+            ->with("rooms/{$this->room_id}/messages/read")
+            ->andReturn($response);
+
+        $message = (new Rooms($api))->markMessageAsRead($this->room_id);
+        $this->assertEquals($message, $response);
+
+    }
+
+    public function testMarkMessageAsReadWithMessageID()
+    {
+        $message_id = 123456;
+        $response = $this->getMockResponse('rooms/markMessageAsReadResponse');
+        $api = Mockery::mock(Chatwork::class);
+        $api->shouldReceive('put')
+            ->with("rooms/{$this->room_id}/messages/read", [
+                'message_id' => '123456'
+            ])
+            ->andReturn($response);
+
+        $message = (new Rooms($api))->markMessageAsRead($this->room_id, $message_id);
+        $this->assertEquals($message, $response);
+
+    }
 }
