@@ -3,7 +3,7 @@
 return [
     [
         "account_id" => 123456,
-        "room_id" => 15651,
+        "roomId" => 15651,
         "name" => "Kunka",
         "chatwork_id" => "",
         "organization_id" => 123311,
@@ -13,7 +13,7 @@ return [
     ],
     [
         "account_id" => 123454,
-        "room_id" => 15588,
+        "roomId" => 15588,
         "name" => "Luna",
         "chatwork_id" => "",
         "organization_id" => 67890,

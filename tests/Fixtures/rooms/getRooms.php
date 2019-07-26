@@ -1,6 +1,6 @@
 <?php
 return [
-    [   "room_id"=> 123,
+    [   "roomId"=> 123,
         "name"=> "Group Chat Name",
         "type"=> "group",
         "role"=> "admin",

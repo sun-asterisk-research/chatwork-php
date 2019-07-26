@@ -19,7 +19,7 @@ $incomingrequest = [
 
 $acceptcontact = [
   "account_id"=> 363,
-  "room_id"=> 1234,
+  "roomId"=> 1234,
   "name"=> "John Smith",
   "chatwork_id"=> "tarochatworkid",
   "organization_id"=> 101,

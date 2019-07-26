@@ -2,7 +2,7 @@
 
 return [
     'account_id' => 123456,
-    'room_id' => 654321,
+    'roomId' => 654321,
     'name' => 'John Smith',
     'chatwork_id' => '',
     'organization_id' => 123321,

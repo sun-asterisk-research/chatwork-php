@@ -8,7 +8,7 @@ $params = [
     'name' => 'Website renewal project',
 ];
 
-$updateRoom = [ "room_id" => 1234];
+$updateRoom = [ "roomId" => 1234];
 
 return [
     'roomId' => $roomId,

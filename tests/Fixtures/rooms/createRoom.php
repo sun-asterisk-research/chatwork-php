@@ -10,7 +10,7 @@ $params = [
     "members_readonly_ids" => [15, 103],
 ];
 
-$newRoom = ["room_id" => 1234];
+$newRoom = ["roomId" => 1234];
 
 $params1 = [
     "description" => "group chat description",
