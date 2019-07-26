@@ -132,4 +132,35 @@ class RoomsTest extends TestCase
 
         $this->assertEquals($response, $roomInfo->getRoomFileById($room_id, $file_id));
     }
+
+    protected $roomId = 100000;
+
+    //GetMessage
+    public function testGetMessageWithForceDefault()
+    {
+        $respone = $this->getMockResponse('rooms/messageGet');
+        $params = [
+            'force' => 0,
+        ];
+        $api = Mockery::mock(Chatwork::class);
+        $api->shouldReceive('get')->with("rooms/{$this->roomId}/messages", $params)
+        ->andReturn($respone);
+
+        $messagge = (new Rooms($api))->getMessages($this->roomId);
+        $this->assertEquals($messagge, $respone);
+    }
+
+    public function testGetMessageWithForceTrue()
+    {
+        $respone = $this->getMockResponse('rooms/messageGet');
+        $params = [
+            'force' => 1,
+        ];
+        $api = Mockery::mock(Chatwork::class);
+        $api->shouldReceive('get')->with("rooms/{$this->roomId}/messages", $params)
+            ->andReturn($respone);
+
+        $messagge = (new Rooms($api))->getMessages($this->roomId, true);
+        $this->assertEquals($messagge, $respone);
+    }
 }

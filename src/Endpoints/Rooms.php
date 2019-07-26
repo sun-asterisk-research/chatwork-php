@@ -133,4 +133,16 @@ class Rooms extends Endpoint
             ['create_download_url' => $createDownloadUrl ? 1 : 0]
         );
     }
+
+    /**
+     * @param  int $roomId
+     * @param  bool $force
+     * @return array
+     */
+    public function getMessages($roomId, $force = false)
+    {
+        return $this->api->get("rooms/{$roomId}/messages", [
+            'force' => $force ? 1 : 0,
+        ]);
+    }
 }
