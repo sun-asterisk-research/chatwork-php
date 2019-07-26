@@ -11,7 +11,7 @@ class RoomsTest extends TestCase
     //GetMessage
     public function testGetMessageWithForceDefault()
     {
-        $respone = $this->getMockResponse('rooms/messageGet');
+        $respone = $this->getMockResponse('rooms/getMessageResponse');
         $params = [
             'force' => 0,
         ];
@@ -25,7 +25,7 @@ class RoomsTest extends TestCase
 
     public function testGetMessageWithForceTrue()
     {
-        $respone = $this->getMockResponse('rooms/messageGet');
+        $respone = $this->getMockResponse('rooms/getMessageResponse');
         $params = [
             'force' => 1,
         ];
@@ -66,6 +66,33 @@ class RoomsTest extends TestCase
             ->andReturn($response);
 
         $message = (new Rooms($api))->sendMessageToAll($this->room_id, $body);
+        $this->assertEquals($message, $response);
+    }
+
+    public function testMarkMessageAsReadWithoutMessageID()
+    {
+        $response = $this->getMockResponse('rooms/markMessageAsReadResponse');
+        $api = Mockery::mock(Chatwork::class);
+        $api->shouldReceive('put')
+            ->with("rooms/{$this->room_id}/messages/read")
+            ->andReturn($response);
+
+        $message = (new Rooms($api))->markMessageAsRead($this->room_id);
+        $this->assertEquals($message, $response);
+    }
+
+    public function testMarkMessageAsReadWithMessageID()
+    {
+        $message_id = 123456;
+        $response = $this->getMockResponse('rooms/markMessageAsReadResponse');
+        $api = Mockery::mock(Chatwork::class);
+        $api->shouldReceive('put')
+            ->with("rooms/{$this->room_id}/messages/read", [
+                'message_id' => '123456',
+            ])
+            ->andReturn($response);
+
+        $message = (new Rooms($api))->markMessageAsRead($this->room_id, $message_id);
         $this->assertEquals($message, $response);
     }
 }

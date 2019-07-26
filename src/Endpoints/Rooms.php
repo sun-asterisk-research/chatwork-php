@@ -42,4 +42,15 @@ class Rooms extends Endpoint
             'body' => $body,
         ]);
     }
+
+    public function markMessageAsRead($room_id, $message_id = null)
+    {
+        if ($message_id == null) {
+            return $this->api->put("rooms/{$room_id}/messages/read");
+        } else {
+            return $this->api->put("rooms/{$room_id}/messages/read", [
+                'message_id' => $message_id,
+            ]);
+        }
+    }
 }
