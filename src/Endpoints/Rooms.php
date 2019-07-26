@@ -70,4 +70,11 @@ class Rooms extends Endpoint
             'message_id' => $message_id,
         ]);
     }
+
+    public function updateMessage($room_id, $message_id, $body)
+    {
+        return $this->api->put("rooms/{$room_id}/messages/{$message_id}", [
+            'body' => $body,
+        ]);
+    }
 }

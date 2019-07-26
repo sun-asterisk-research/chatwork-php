@@ -110,4 +110,20 @@ class RoomsTest extends TestCase
         $message = (new Rooms($api))->markMessageAsUnRead($this->room_id, $message_id);
         $this->assertEquals($message, $response);
     }
+
+    public function testUpdateMessage()
+    {
+        $message_id = 123456;
+        $body = "hello";
+        $response = $this->getMockResponse('rooms/updateMessageResponse');
+        $api = Mockery::mock(Chatwork::class);
+        $api->shouldReceive('put')
+            ->with("rooms/{$this->room_id}/messages/{$message_id}", [
+                'body' => 'hello',
+            ])
+            ->andReturn($response);
+
+        $message = (new Rooms($api))->updateMessage($this->room_id, $message_id, $body);
+        $this->assertEquals($message, $response);
+    }
 }
