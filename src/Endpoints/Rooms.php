@@ -170,4 +170,32 @@ class Rooms extends Endpoint
             'body' => $body,
         ]);
     }
+
+    /**
+     * @param  int $roomId
+     * @param  int $messageId
+     * @return array
+     */
+    public function markMessageAsRead($roomId, $messageId = null)
+    {
+        if ($messageId == null) {
+            return $this->api->put("rooms/{$roomId}/messages/read");
+        } else {
+            return $this->api->put("rooms/{$roomId}/messages/read", [
+                'message_id' => $messageId,
+            ]);
+        }
+    }
+
+    /**
+     * @param  int $roomId
+     * @param  int $messageId
+     * @return array
+     */
+    public function markMessageAsUnRead($roomId, $messageId)
+    {
+        return $this->api->put("rooms/{$roomId}/messages/unread", [
+            'message_id' => $messageId,
+        ]);
+    }
 }

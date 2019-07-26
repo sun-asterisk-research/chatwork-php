@@ -138,7 +138,7 @@ class RoomsTest extends TestCase
     //GetMessage
     public function testGetMessageWithForceDefault()
     {
-        $respone = $this->getMockResponse('rooms/messageGet');
+        $respone = $this->getMockResponse('rooms/getMessageResponse');
         $params = [
             'force' => 0,
         ];
@@ -152,7 +152,7 @@ class RoomsTest extends TestCase
 
     public function testGetMessageWithForceTrue()
     {
-        $respone = $this->getMockResponse('rooms/messageGet');
+        $respone = $this->getMockResponse('rooms/getMessageResponse');
         $params = [
             'force' => 1,
         ];
@@ -193,6 +193,48 @@ class RoomsTest extends TestCase
             ->andReturn($response);
 
         $message = (new Rooms($api))->sendMessageToAll($this->roomId, $body);
+        $this->assertEquals($message, $response);
+    }
+
+    public function testMarkMessageAsReadWithoutMessageID()
+    {
+        $response = $this->getMockResponse('rooms/markMessageAsReadResponse');
+        $api = Mockery::mock(Chatwork::class);
+        $api->shouldReceive('put')
+            ->with("rooms/{$this->roomId}/messages/read")
+            ->andReturn($response);
+
+        $message = (new Rooms($api))->markMessageAsRead($this->roomId);
+        $this->assertEquals($message, $response);
+    }
+
+    public function testMarkMessageAsReadWithMessageID()
+    {
+        $messageId = 123456;
+        $response = $this->getMockResponse('rooms/markMessageAsReadResponse');
+        $api = Mockery::mock(Chatwork::class);
+        $api->shouldReceive('put')
+            ->with("rooms/{$this->roomId}/messages/read", [
+                'message_id' => '123456',
+            ])
+            ->andReturn($response);
+
+        $message = (new Rooms($api))->markMessageAsRead($this->roomId, $messageId);
+        $this->assertEquals($message, $response);
+    }
+
+    public function testMarkMessageAsUnRead()
+    {
+        $messageId = 123456;
+        $response = $this->getMockResponse('rooms/markMessageAsUnReadResponse');
+        $api = Mockery::mock(Chatwork::class);
+        $api->shouldReceive('put')
+            ->with("rooms/{$this->roomId}/messages/unread", [
+                'message_id' => '123456',
+            ])
+            ->andReturn($response);
+
+        $message = (new Rooms($api))->markMessageAsUnRead($this->roomId, $messageId);
         $this->assertEquals($message, $response);
     }
 }
