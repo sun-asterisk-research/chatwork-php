@@ -144,8 +144,7 @@ class RoomsTest extends TestCase
         ];
         $api = Mockery::mock(Chatwork::class);
         $api->shouldReceive('get')->with("rooms/{$this->roomId}/messages", $params)
-        ->andReturn($respone);
-
+            ->andReturn($respone);
         $messagge = (new Rooms($api))->getMessages($this->roomId);
         $this->assertEquals($messagge, $respone);
     }
@@ -235,6 +234,35 @@ class RoomsTest extends TestCase
             ->andReturn($response);
 
         $message = (new Rooms($api))->markMessageAsUnRead($this->roomId, $messageId);
+        $this->assertEquals($message, $response);
+    }
+
+    public function testUpdateMessage()
+    {
+        $messageId = 123456;
+        $body = "hello";
+        $response = $this->getMockResponse('rooms/updateMessageResponse');
+        $api = Mockery::mock(Chatwork::class);
+        $api->shouldReceive('put')
+            ->with("rooms/{$this->roomId}/messages/{$messageId}", [
+                'body' => 'hello',
+            ])
+            ->andReturn($response);
+
+        $message = (new Rooms($api))->updateMessage($this->roomId, $messageId, $body);
+        $this->assertEquals($message, $response);
+    }
+
+    public function testDeleteMessage()
+    {
+        $messageId = 123456;
+        $response = $this->getMockResponse('rooms/deleteMessageResponse');
+        $api = Mockery::mock(Chatwork::class);
+        $api->shouldReceive('delete')
+            ->with("rooms/{$this->roomId}/messages/{$messageId}")
+            ->andReturn($response);
+
+        $message = (new Rooms($api))->deleteMessage($this->roomId, $messageId);
         $this->assertEquals($message, $response);
     }
 }

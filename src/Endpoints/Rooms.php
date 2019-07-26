@@ -198,4 +198,27 @@ class Rooms extends Endpoint
             'message_id' => $messageId,
         ]);
     }
+
+    /**
+     * @param  int $roomId
+     * @param  int $messageId
+     * @param  string $body
+     * @return array
+     */
+    public function updateMessage($roomId, $messageId, $body)
+    {
+        return $this->api->put("rooms/{$roomId}/messages/{$messageId}", [
+            'body' => $body,
+        ]);
+    }
+
+    /**
+     * @param  int $roomId
+     * @param  int $messageId
+     * @return array
+     */
+    public function deleteMessage($roomId, $messageId)
+    {
+        return $this->api->delete("rooms/{$roomId}/messages/{$messageId}");
+    }
 }
