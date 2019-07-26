@@ -17,7 +17,7 @@ class RoomsTest extends TestCase
         ];
         $api = Mockery::mock(Chatwork::class);
         $api->shouldReceive('get')->with("rooms/{$this->room_id}/messages", $params)
-        ->andReturn($respone);
+            ->andReturn($respone);
 
         $messagge = (new Rooms($api))->getMessages($this->room_id);
         $this->assertEquals($messagge, $respone);
@@ -124,6 +124,19 @@ class RoomsTest extends TestCase
             ->andReturn($response);
 
         $message = (new Rooms($api))->updateMessage($this->room_id, $message_id, $body);
+        $this->assertEquals($message, $response);
+    }
+
+    public function testDeleteMessage()
+    {
+        $message_id = 123456;
+        $response = $this->getMockResponse('rooms/deleteMessageResponse');
+        $api = Mockery::mock(Chatwork::class);
+        $api->shouldReceive('delete')
+            ->with("rooms/{$this->room_id}/messages/{$message_id}")
+            ->andReturn($response);
+
+        $message = (new Rooms($api))->deleteMessage($this->room_id, $message_id);
         $this->assertEquals($message, $response);
     }
 }
