@@ -43,6 +43,11 @@ class Rooms extends Endpoint
         ]);
     }
 
+    /**
+     * @param $room_id
+     * @param null $message_id
+     * @return array
+     */
     public function markMessageAsRead($room_id, $message_id = null)
     {
         if ($message_id == null) {
@@ -52,5 +57,17 @@ class Rooms extends Endpoint
                 'message_id' => $message_id,
             ]);
         }
+    }
+
+    /**
+     * @param $room_id
+     * @param $message_id
+     * @return array
+     */
+    public function markMessageAsUnRead($room_id, $message_id)
+    {
+        return $this->api->put("rooms/{$room_id}/messages/unread", [
+            'message_id' => $message_id,
+        ]);
     }
 }
