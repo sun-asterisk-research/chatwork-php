@@ -58,7 +58,7 @@ class RoomsTest extends TestCase
         $body = "Hello!!";
         $response = $this->getMockResponse('rooms/sendMessageResponse');
         $data = [
-            'body' => "[toall]\n" . $body
+            'body' => "[toall]\n" . $body,
         ];
         $api = Mockery::mock(Chatwork::class);
         $api->shouldReceive('post')

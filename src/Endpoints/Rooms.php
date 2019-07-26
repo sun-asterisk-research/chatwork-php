@@ -39,7 +39,7 @@ class Rooms extends Endpoint
     {
         $body = "[toall]\n" . $body;
         return $this->api->post("rooms/{$room_id}/messages", [
-            'body' => $body
+            'body' => $body,
         ]);
     }
 }
