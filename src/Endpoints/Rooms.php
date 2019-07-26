@@ -157,4 +157,17 @@ class Rooms extends Endpoint
             'body' => $body,
         ]);
     }
+
+    /**
+     * @param  int $roomId
+     * @param  string $body
+     * @return array
+     */
+    public function sendMessageToAll($roomId, $body)
+    {
+        $body = "[toall]\n" . $body;
+        return $this->api->post("rooms/{$roomId}/messages", [
+            'body' => $body,
+        ]);
+    }
 }
