@@ -19,6 +19,23 @@ class RoomsTest extends TestCase
         $this->assertEquals($response, $rooms->getRooms());
     }
 
+    public function testCreatRoom()
+    {
+        $responses = $this->getMockResponse('rooms/createRoom');
+        $name = $responses['name'];
+        $params = $responses['params'];
+        $membersAdminIds = $responses['membersAdminIds'];
+        $params1 = $responses['params1'];
+        $response = $responses['newRoom'];
+
+        /** @var Chatwork $api */
+        $api = m::mock(Chatwork::class);
+        $api->shouldReceive('post')->with('rooms', $params1)->andReturns($response);
+
+        $newRoom = new Rooms($api);
+        $this->assertEquals($response, $newRoom->createRoom($name, $membersAdminIds, $params));
+    }
+
     public function testGetRoomById()
     {
         $responses = $this->getMockResponse('rooms/getRoomById');

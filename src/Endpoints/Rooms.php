@@ -16,6 +16,31 @@ class Rooms extends Endpoint
     }
 
     /**
+     * Create new room
+     * @param  string $name
+     * @param  array $membersAdminIds
+     * @param  array $params
+     * @return array
+     *
+     * @see http://developer.chatwork.com/vi/endpoint_rooms.html#POST-rooms
+     */
+    public function createRoom($name, $membersAdminIds = [], $params = [])
+    {
+        $params['members_admin_ids'] = $membersAdminIds;
+        $params['name'] = $name;
+
+        $params['members_admin_ids'] = implode(',', $params['members_admin_ids']);
+        if (!empty($params['members_member_ids'])) {
+            $params['members_member_ids'] = implode(',', $params['members_member_ids']);
+        }
+        if (!empty($params['members_readonly_ids'])) {
+            $params['members_readonly_ids'] = implode(',', $params['members_readonly_ids']);
+        }
+
+        return $this->api->post('rooms', $params);
+    }
+
+    /**
      * Get room information
      * @param  int $roomId
      * @return array
