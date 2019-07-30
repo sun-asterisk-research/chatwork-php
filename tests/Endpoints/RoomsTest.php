@@ -290,6 +290,30 @@ class RoomsTest extends TestCase
             ->andReturn($response);
 
         $task = (new Rooms($api))->getFiles($this->roomId, $accountId);
+    }
+
+    public function testGetTasksWithoutParams()
+    {
+        $response = $this->getMockResponse('rooms/getTaskResponse');
+        $api = Mockery::mock(Chatwork::class);
+        $api->shouldReceive('get')
+            ->with("rooms/{$this->roomId}/tasks", [])
+            ->andReturn($response);
+
+        $task = (new Rooms($api))->getTasks($this->roomId);
+        $this->assertEquals($task, $response);
+    }
+
+    public function testGetTasksWithParams()
+    {
+        $response = $this->getMockResponse('rooms/getTaskResponse');
+        $params = $this->getMockResponse('rooms/getTaskParams');
+        $api = Mockery::mock(Chatwork::class);
+        $api->shouldReceive('get')
+            ->with("rooms/{$this->roomId}/tasks", $params)
+            ->andReturn($response);
+
+        $task = (new Rooms($api))->getTasks($this->roomId, $params);
         $this->assertEquals($task, $response);
     }
 }

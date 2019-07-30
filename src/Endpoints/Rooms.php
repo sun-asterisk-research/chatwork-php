@@ -236,4 +236,14 @@ class Rooms extends Endpoint
         }
         return $this->api->get("rooms/{$roomId}/files");
     }
+
+    /**
+     * @param  int $roomId
+     * @param  array $params
+     * @return array
+     */
+    public function getTasks($roomId, $params = [])
+    {
+        return $this->api->get("rooms/{$roomId}/tasks", $params);
+    }
 }
