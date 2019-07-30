@@ -221,4 +221,19 @@ class Rooms extends Endpoint
     {
         return $this->api->delete("rooms/{$roomId}/messages/{$messageId}");
     }
+
+    /**
+     * @param  int $roomId
+     * @param  int $accountId
+     * @return array
+     */
+    public function getFiles($roomId, $accountId = null)
+    {
+        if ($accountId) {
+            return $this->api->get("rooms/{$roomId}/files", [
+                'account_id' => $accountId,
+            ]);
+        }
+        return $this->api->get("rooms/{$roomId}/files");
+    }
 }
