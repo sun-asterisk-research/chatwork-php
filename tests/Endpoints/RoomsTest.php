@@ -316,4 +316,24 @@ class RoomsTest extends TestCase
         $task = (new Rooms($api))->getTasks($this->roomId, $params);
         $this->assertEquals($task, $response);
     }
+
+    public function testCreateTasks()
+    {
+        $response = $this->getMockResponse('rooms/TaskResponse');
+        $params = $this->getMockResponse('rooms/createTaskParams');
+        $toIds = $params['to_ids'];
+        foreach ($params['params'] as $param) {
+            $api = Mockery::mock(Chatwork::class);
+            $api->shouldReceive('post')
+                ->with("rooms/{$this->roomId}/tasks", $param)
+                ->andReturn($response);
+            $body = $param['body'];
+            if (array_key_exists('limit', $param)) {
+                $task = (new Rooms($api))->createTask($this->roomId, $body, $toIds, $param['limit']);
+            } else {
+                $task = (new Rooms($api))->createTask($this->roomId, $body, $toIds);
+            }
+            $this->assertEquals($task, $response);
+        }
+    }
 }

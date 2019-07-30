@@ -246,4 +246,26 @@ class Rooms extends Endpoint
     {
         return $this->api->get("rooms/{$roomId}/tasks", $params);
     }
+
+    /**
+     * @param  int $roomId
+     * @param  string $body
+     * @param  array $toIds
+     * @param  int $limit
+     * @return array
+     */
+    public function createTask($roomId, $body, $toIds = [], $limit = null)
+    {
+        if (isset($toIds)) {
+            $toIds = implode(",", $toIds);
+        }
+        $params = [
+            'body' => $body,
+            'to_ids' => $toIds,
+        ];
+        if ($limit) {
+            $params['limit'] = $limit;
+        }
+        return $this->api->post("rooms/{$roomId}/tasks", $params);
+    }
 }
