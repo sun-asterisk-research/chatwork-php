@@ -336,4 +336,17 @@ class RoomsTest extends TestCase
             $this->assertEquals($task, $response);
         }
     }
+
+    public function testGetTaskInfo()
+    {
+        $taskId = 3;
+        $response = $this->getMockResponse('rooms/taskInfoResponse');
+        $api = Mockery::mock(Chatwork::class);
+        $api->shouldReceive('get')
+            ->with("rooms/{$this->roomId}/tasks/{$taskId}")
+            ->andReturn($response);
+
+        $task = (new Rooms($api))->getTaskInfo($this->roomId, $taskId);
+        $this->assertEquals($task, $response);
+    }
 }
