@@ -290,6 +290,63 @@ class RoomsTest extends TestCase
             ->andReturn($response);
 
         $task = (new Rooms($api))->getFiles($this->roomId, $accountId);
+    }
+
+    public function testGetTasksWithoutParams()
+    {
+        $response = $this->getMockResponse('rooms/getTaskResponse');
+        $api = Mockery::mock(Chatwork::class);
+        $api->shouldReceive('get')
+            ->with("rooms/{$this->roomId}/tasks", [])
+            ->andReturn($response);
+
+        $task = (new Rooms($api))->getTasks($this->roomId);
+        $this->assertEquals($task, $response);
+    }
+
+    public function testGetTasksWithParams()
+    {
+        $response = $this->getMockResponse('rooms/getTaskResponse');
+        $params = $this->getMockResponse('rooms/getTaskParams');
+        $api = Mockery::mock(Chatwork::class);
+        $api->shouldReceive('get')
+            ->with("rooms/{$this->roomId}/tasks", $params)
+            ->andReturn($response);
+
+        $task = (new Rooms($api))->getTasks($this->roomId, $params);
+        $this->assertEquals($task, $response);
+    }
+
+    public function testCreateTasks()
+    {
+        $response = $this->getMockResponse('rooms/TaskResponse');
+        $params = $this->getMockResponse('rooms/createTaskParams');
+        $toIds = $params['to_ids'];
+        foreach ($params['params'] as $param) {
+            $api = Mockery::mock(Chatwork::class);
+            $api->shouldReceive('post')
+                ->with("rooms/{$this->roomId}/tasks", $param)
+                ->andReturn($response);
+            $body = $param['body'];
+            if (array_key_exists('limit', $param)) {
+                $task = (new Rooms($api))->createTask($this->roomId, $body, $toIds, $param['limit']);
+            } else {
+                $task = (new Rooms($api))->createTask($this->roomId, $body, $toIds);
+            }
+            $this->assertEquals($task, $response);
+        }
+    }
+
+    public function testGetTaskInfo()
+    {
+        $taskId = 3;
+        $response = $this->getMockResponse('rooms/taskInfoResponse');
+        $api = Mockery::mock(Chatwork::class);
+        $api->shouldReceive('get')
+            ->with("rooms/{$this->roomId}/tasks/{$taskId}")
+            ->andReturn($response);
+
+        $task = (new Rooms($api))->getTaskInfo($this->roomId, $taskId);
         $this->assertEquals($task, $response);
     }
 }
