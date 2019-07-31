@@ -265,4 +265,31 @@ class RoomsTest extends TestCase
         $message = (new Rooms($api))->deleteMessage($this->roomId, $messageId);
         $this->assertEquals($message, $response);
     }
+
+    public function testGetFileWithoutAccountID()
+    {
+        $response = $this->getMockResponse('rooms/getFileResponse');
+        $api = Mockery::mock(Chatwork::class);
+        $api->shouldReceive('get')
+            ->with("rooms/{$this->roomId}/files")
+            ->andReturn($response);
+
+        $task = (new Rooms($api))->getFiles($this->roomId);
+        $this->assertEquals($task, $response);
+    }
+
+    public function testGetFileWithAccountID()
+    {
+        $accountId = 123;
+        $response = $this->getMockResponse('rooms/getFileResponse');
+        $api = Mockery::mock(Chatwork::class);
+        $api->shouldReceive('get')
+            ->with("rooms/{$this->roomId}/files", [
+                'account_id' => $accountId,
+            ])
+            ->andReturn($response);
+
+        $task = (new Rooms($api))->getFiles($this->roomId, $accountId);
+        $this->assertEquals($task, $response);
+    }
 }
