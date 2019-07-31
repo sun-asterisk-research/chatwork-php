@@ -163,4 +163,20 @@ class RoomsTest extends TestCase
         $messagge = (new Rooms($api))->getMessages($this->roomId, true);
         $this->assertEquals($messagge, $respone);
     }
+
+    public function testSendMessage()
+    {
+        $body = "Hello!!";
+        $response = $this->getMockResponse('rooms/sendMessageResponse');
+        $data = [
+            'body' => $body,
+        ];
+        $api = Mockery::mock(Chatwork::class);
+        $api->shouldReceive('post')
+            ->with("rooms/{$this->roomId}/messages", $data)
+            ->andReturn($response);
+
+        $message = (new Rooms($api))->sendMessage($this->roomId, $body);
+        $this->assertEquals($message, $response);
+    }
 }
