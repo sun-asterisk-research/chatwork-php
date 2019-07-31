@@ -133,4 +133,92 @@ class Rooms extends Endpoint
             ['create_download_url' => $createDownloadUrl ? 1 : 0]
         );
     }
+
+    /**
+     * @param  int $roomId
+     * @param  bool $force
+     * @return array
+     */
+    public function getMessages($roomId, $force = false)
+    {
+        return $this->api->get("rooms/{$roomId}/messages", [
+            'force' => $force ? 1 : 0,
+        ]);
+    }
+
+    /**
+     * @param  int $roomId
+     * @param  string $body
+     * @return array
+     */
+    public function sendMessage($roomId, $body)
+    {
+        return $this->api->post("rooms/{$roomId}/messages", [
+            'body' => $body,
+        ]);
+    }
+
+    /**
+     * @param  int $roomId
+     * @param  string $body
+     * @return array
+     */
+    public function sendMessageToAll($roomId, $body)
+    {
+        $body = "[toall]\n" . $body;
+        return $this->api->post("rooms/{$roomId}/messages", [
+            'body' => $body,
+        ]);
+    }
+
+    /**
+     * @param  int $roomId
+     * @param  int $messageId
+     * @return array
+     */
+    public function markMessageAsRead($roomId, $messageId = null)
+    {
+        if ($messageId == null) {
+            return $this->api->put("rooms/{$roomId}/messages/read");
+        } else {
+            return $this->api->put("rooms/{$roomId}/messages/read", [
+                'message_id' => $messageId,
+            ]);
+        }
+    }
+
+    /**
+     * @param  int $roomId
+     * @param  int $messageId
+     * @return array
+     */
+    public function markMessageAsUnRead($roomId, $messageId)
+    {
+        return $this->api->put("rooms/{$roomId}/messages/unread", [
+            'message_id' => $messageId,
+        ]);
+    }
+
+    /**
+     * @param  int $roomId
+     * @param  int $messageId
+     * @param  string $body
+     * @return array
+     */
+    public function updateMessage($roomId, $messageId, $body)
+    {
+        return $this->api->put("rooms/{$roomId}/messages/{$messageId}", [
+            'body' => $body,
+        ]);
+    }
+
+    /**
+     * @param  int $roomId
+     * @param  int $messageId
+     * @return array
+     */
+    public function deleteMessage($roomId, $messageId)
+    {
+        return $this->api->delete("rooms/{$roomId}/messages/{$messageId}");
+    }
 }
