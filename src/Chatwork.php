@@ -3,7 +3,9 @@
 namespace SunAsterisk\Chatwork;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
 use SunAsterisk\Chatwork\Auth\Auth;
+use SunAsterisk\Chatwork\Exceptions\APIException;
 use function GuzzleHttp\json_decode;
 
 /**
@@ -110,7 +112,14 @@ class Chatwork
      */
     public function request(string $method, $uri = '', array $options = [])
     {
-        $res = $this->client->request($method, $uri, $options);
+        try {
+            $res = $this->client->request($method, $uri, $options);
+        } catch (ClientException $e) {
+            $response = $e->getResponse();
+            $body = json_decode($response->getBody()->getContents(), true);
+
+            throw new APIException($response->getStatusCode(), $body);
+        }
 
         return json_decode($res->getBody()->getContents(), true);
     }
