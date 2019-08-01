@@ -95,11 +95,10 @@ class Chatwork
     /**
      * @param  string $uri
      * @param  array $query
-     * @return array
      */
     public function delete(string $uri, array $query = [])
     {
-        return $this->request('DELETE', $uri, [
+        $this->request('DELETE', $uri, [
             'query' => $query,
         ]);
     }
