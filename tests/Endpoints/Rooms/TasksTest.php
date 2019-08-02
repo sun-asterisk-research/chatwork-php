@@ -32,7 +32,7 @@ class TasksTest extends TestCase
         $this->assertEquals(['response'], $tasks->create(
             'Buy milk',
             [101, 102],
-            new DateTime('2018-08-01 00:00:00'),
+            new DateTime('2018-08-01 00:00:00')
         ));
     }
 
