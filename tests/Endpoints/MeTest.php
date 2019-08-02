@@ -1,6 +1,5 @@
 <?php
 
-use Mockery as m;
 use SunAsterisk\Chatwork\Chatwork;
 use SunAsterisk\Chatwork\Endpoints\Me;
 
@@ -11,7 +10,7 @@ class MeTest extends TestCase
         $response = $this->getMockResponse('me');
 
         /** @var Chatwork $api */
-        $api = m::mock(Chatwork::class);
+        $api = $this->getAPIMock();
         $api->shouldReceive('get')->with('me')->andReturns($response);
 
         $me = new Me($api);

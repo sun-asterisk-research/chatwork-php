@@ -10,6 +10,11 @@ use function GuzzleHttp\json_decode;
 
 /**
  * @method array me()
+ * @method array contacts()
+ * @method \SunAsterisk\Chatwork\Endpoints\IncomingRequests incomingRequests()
+ * @method \SunAsterisk\Chatwork\Endpoints\My my()
+ * @method \SunAsterisk\Chatwork\Endpoints\Room room(int $id)
+ * @method \SunAsterisk\Chatwork\Endpoints\Rooms rooms()
  */
 class Chatwork
 {

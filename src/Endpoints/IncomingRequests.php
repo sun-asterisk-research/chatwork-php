@@ -5,37 +5,40 @@ namespace SunAsterisk\Chatwork\Endpoints;
 class IncomingRequests extends Endpoint
 {
     /**
-     * Get Friend Request list
-     * @return array
+     * Get pending contact requests
      *
      * @see http://developer.chatwork.com/vi/endpoint_incoming_requests.html#GET-incoming_requests
+     *
+     * @return array
      */
-    public function getIncomingRequests()
+    public function get()
     {
         return $this->api->get('incoming_requests');
     }
 
     /**
      * Accept contact request
-     * @param  int $requestId
-     * @return array
      *
      * @see http://developer.chatwork.com/vi/endpoint_incoming_requests.html#PUT-incoming_requests-request_id
+     *
+     * @param  int $requestId
+     * @return array
      */
-    public function acceptContactRequest($requestId)
+    public function accept($requestId)
     {
-        return $this->api->put(sprintf('incoming_requests/%d', $requestId));
+        return $this->api->put("incoming_requests/{$requestId}");
     }
 
     /**
      * Reject contact request
-     * @param  int $requestId
-     * @return array
      *
      * @see http://developer.chatwork.com/vi/endpoint_incoming_requests.html#DELETE-incoming_requests-request_id
+     *
+     * @param  int $requestId
+     * @return array
      */
-    public function rejectContactRequest($requestId)
+    public function reject($requestId)
     {
-        return $this->api->delete(sprintf('incoming_requests/%d', $requestId));
+        return $this->api->delete("incoming_requests/{$requestId}");
     }
 }
