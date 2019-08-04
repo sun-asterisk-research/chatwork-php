@@ -9,7 +9,7 @@ class Members extends Endpoint
      *
      * @see http://developer.chatwork.com/vi/endpoint_rooms.html#GET-rooms-room_id-members
      */
-    public function list(): array
+    public function list()
     {
         return $this->api->get("rooms/{$this->roomId}/members");
     }
@@ -19,7 +19,7 @@ class Members extends Endpoint
      *
      * @see http://developer.chatwork.com/vi/endpoint_rooms.html#PUT-rooms-room_id-members
      */
-    public function update(array $members): array
+    public function update(array $members)
     {
         return $this->api->put("rooms/{$this->roomId}/members", [
             'members_admin_ids' => implode(',', $members['members_admin_ids'] ?? []),

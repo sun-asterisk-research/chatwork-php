@@ -9,7 +9,7 @@ class IncomingRequests extends Endpoint
      *
      * @see http://developer.chatwork.com/vi/endpoint_incoming_requests.html#GET-incoming_requests
      *
-     * @return array
+     * @return array|null
      */
     public function list()
     {

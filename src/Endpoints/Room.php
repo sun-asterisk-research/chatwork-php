@@ -38,7 +38,7 @@ class Room extends Endpoint
      *
      * @see http://developer.chatwork.com/vi/endpoint_rooms.html#GET-rooms-room_id
      */
-    public function detail(): array
+    public function detail()
     {
         return $this->api->get("rooms/{$this->roomId}");
     }
@@ -48,7 +48,7 @@ class Room extends Endpoint
      *
      * @see http://developer.chatwork.com/vi/endpoint_rooms.html#PUT-rooms-room_id
      */
-    public function updateRoomInfo(array $params): array
+    public function updateRoomInfo(array $params)
     {
         return $this->api->put("rooms/{$this->roomId}", $params);
     }

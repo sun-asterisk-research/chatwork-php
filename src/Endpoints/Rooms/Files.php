@@ -9,7 +9,7 @@ class Files extends Endpoint
      *
      * @see http://developer.chatwork.com/vi/endpoint_rooms.html#GET-rooms-room_id-files
      */
-    public function list(array $options = []): array
+    public function list(array $options = [])
     {
         return $this->api->get("rooms/{$this->roomId}/files", $options);
     }
@@ -19,7 +19,7 @@ class Files extends Endpoint
      *
      * @see http://developer.chatwork.com/vi/endpoint_rooms.html#GET-rooms-room_id-files-file_id
      */
-    public function detail(int $fileId, array $options = []): array
+    public function detail(int $fileId, array $options = [])
     {
         return $this->api->get("rooms/{$this->roomId}/files/{$fileId}", $options);
     }

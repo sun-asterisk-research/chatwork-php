@@ -9,7 +9,7 @@ class Messages extends Endpoint
      *
      * @see http://developer.chatwork.com/vi/endpoint_rooms.html#GET-rooms-room_id-messages
      */
-    public function list(array $options = []): array
+    public function list(array $options = [])
     {
         return $this->api->get("rooms/{$this->roomId}/messages", $options);
     }
@@ -19,7 +19,7 @@ class Messages extends Endpoint
      *
      * @see http://developer.chatwork.com/vi/endpoint_rooms.html#POST-rooms-room_id-messages
      */
-    public function create(string $body): array
+    public function create(string $body)
     {
         return $this->api->post("rooms/{$this->roomId}/messages", [
             'body' => $body,
@@ -31,7 +31,7 @@ class Messages extends Endpoint
      *
      * @see http://developer.chatwork.com/vi/endpoint_rooms.html#PUT-rooms-room_id-messages-read
      */
-    public function markAsRead(int $messageId): array
+    public function markAsRead(int $messageId)
     {
         return $this->api->put("rooms/{$this->roomId}/messages/read", [
             'message_id' => $messageId,
@@ -43,7 +43,7 @@ class Messages extends Endpoint
      *
      * @see http://developer.chatwork.com/vi/endpoint_rooms.html#PUT-rooms-room_id-messages-unread
      */
-    public function markAsUnread(int $messageId): array
+    public function markAsUnread(int $messageId)
     {
         return $this->api->put("rooms/{$this->roomId}/messages/unread", [
             'message_id' => $messageId,
@@ -55,7 +55,7 @@ class Messages extends Endpoint
      *
      * @see http://developer.chatwork.com/vi/endpoint_rooms.html#GET-rooms-room_id-messages-message_id
      */
-    public function detail(int $messageId): array
+    public function detail(int $messageId)
     {
         return $this->api->get("rooms/{$this->roomId}/messages/{$messageId}");
     }
@@ -65,7 +65,7 @@ class Messages extends Endpoint
      *
      * @see http://developer.chatwork.com/vi/endpoint_rooms.html#PUT-rooms-room_id-messages-message_id
      */
-    public function update(int $messageId, string $body): array
+    public function update(int $messageId, string $body)
     {
         return $this->api->put("rooms/{$this->roomId}/messages/{$messageId}", [
             'body' => $body,

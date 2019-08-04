@@ -11,7 +11,7 @@ class Tasks extends Endpoint
      *
      * @see http://developer.chatwork.com/vi/endpoint_rooms.html#GET-rooms-room_id-tasks
      */
-    public function list(array $options = []): array
+    public function list(array $options = [])
     {
         return $this->api->get("rooms/{$this->roomId}/tasks", $options);
     }
@@ -26,7 +26,7 @@ class Tasks extends Endpoint
      * @param  DateTime $limit
      * @return array
      */
-    public function create(string $body, array $assignees, DateTime $limit = null): array
+    public function create(string $body, array $assignees, DateTime $limit = null)
     {
         return $this->api->post("rooms/{$this->roomId}/tasks", [
             'body' => $body,
@@ -40,7 +40,7 @@ class Tasks extends Endpoint
      *
      * @see http://developer.chatwork.com/vi/endpoint_rooms.html#GET-rooms-room_id-tasks-task_id
      */
-    public function detail(int $taskId, array $options = []): array
+    public function detail(int $taskId, array $options = [])
     {
         return $this->api->get("rooms/{$this->roomId}/tasks/{$taskId}", $options);
     }

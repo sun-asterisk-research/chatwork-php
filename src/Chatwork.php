@@ -62,7 +62,7 @@ class Chatwork
     /**
      * @param  string $uri
      * @param  array $query
-     * @return array
+     * @return mixed
      */
     public function get(string $uri, array $query = [])
     {
@@ -74,7 +74,7 @@ class Chatwork
     /**
      * @param  string $uri
      * @param  array $data
-     * @return array
+     * @return mixed
      */
     public function post(string $uri, array $data = [])
     {
@@ -86,7 +86,7 @@ class Chatwork
     /**
      * @param  string $uri
      * @param  array $data
-     * @return array
+     * @return mixed
      */
     public function put(string $uri, array $data = [])
     {
@@ -98,7 +98,7 @@ class Chatwork
     /**
      * @param  string $uri
      * @param  array $data
-     * @return array
+     * @return mixed
      */
     public function patch(string $uri, array $data = [])
     {
@@ -122,19 +122,21 @@ class Chatwork
      * @param  string $method
      * @param  string $uri
      * @param  array $options
-     * @return array
+     * @return mixed
      */
     public function request(string $method, $uri = '', array $options = [])
     {
         try {
             $res = $this->client->request($method, $uri, $options);
+
+            return json_decode($res->getBody()->getContents(), true);
         } catch (ClientException $e) {
             $response = $e->getResponse();
             $body = json_decode($response->getBody()->getContents(), true);
 
             throw new APIException($response->getStatusCode(), $body);
+        } catch (\InvalidArgumentException $e) {
+            return null;
         }
-
-        return json_decode($res->getBody()->getContents(), true);
     }
 }

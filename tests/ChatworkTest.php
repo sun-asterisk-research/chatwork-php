@@ -73,6 +73,27 @@ class ChatworkTest extends TestCase
         $api->request('test');
     }
 
+    public function testReturnNullForEmptyResponse()
+    {
+        $history = [];
+        $mockResponses = new MockHandler([
+            new Response(200, [], ''),
+        ]);
+
+        $api = $this->getInstanceMock($mockResponses, $history);
+
+        $result = $api->request('GET', 'test');
+
+        $this->assertEquals(null, $result);
+
+        /** @var Request $request */
+        $request = $history[0]['request'];
+
+        $this->assertEquals('GET', $request->getMethod());
+        $this->assertEquals($this->uri('test'), (string) $request->getUri());
+        $this->assertContains('secret', $request->getHeader('X-ChatworkToken'));
+    }
+
     public function testGet()
     {
         $history = [];

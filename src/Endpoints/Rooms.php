@@ -9,7 +9,7 @@ class Rooms extends Endpoint
      *
      * @see http://developer.chatwork.com/vi/endpoint_rooms.html#GET-rooms
      */
-    public function list(): array
+    public function list()
     {
         return $this->api->get('rooms');
     }
@@ -19,7 +19,7 @@ class Rooms extends Endpoint
      *
      * @see http://developer.chatwork.com/vi/endpoint_rooms.html#POST-rooms
      */
-    public function create(array $params): array
+    public function create(array $params)
     {
         $room = array_merge($params, [
             'members_admin_ids' => implode(',', $params['members_admin_ids'] ?? []),

@@ -10,7 +10,7 @@ class My extends Endpoint
      *
      * @see http://developer.chatwork.com/vi/endpoint_my.html#GET-my-status
      */
-    public function status(): array
+    public function status()
     {
         return $this->api->get('my/status');
     }
@@ -20,7 +20,7 @@ class My extends Endpoint
      *
      * http://developer.chatwork.com/vi/endpoint_my.html#GET-my-tasks
      */
-    public function tasks(): array
+    public function tasks()
     {
         return $this->api->get('my/tasks');
     }
