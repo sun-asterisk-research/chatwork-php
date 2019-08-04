@@ -11,7 +11,7 @@ class IncomingRequests extends Endpoint
      *
      * @return array
      */
-    public function get()
+    public function list()
     {
         return $this->api->get('incoming_requests');
     }

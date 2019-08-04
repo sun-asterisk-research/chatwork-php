@@ -15,7 +15,7 @@ class IncomingRequestsTest extends TestCase
 
         $incomingRequests = new IncomingRequests($api);
 
-        $this->assertEquals(['response'], $incomingRequests->get());
+        $this->assertEquals(['response'], $incomingRequests->list());
     }
 
     public function testAcceptContactRequest()
