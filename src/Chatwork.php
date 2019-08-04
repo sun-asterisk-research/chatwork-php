@@ -6,6 +6,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use SunAsterisk\Chatwork\Auth\Auth;
 use SunAsterisk\Chatwork\Exceptions\APIException;
+use SunAsterisk\Chatwork\Helpers\Message;
 use function GuzzleHttp\json_decode;
 
 /**
@@ -47,6 +48,15 @@ class Chatwork
         $endpoint = new $endpointClass($this, ...$arguments);
 
         return is_callable($endpoint) ? $endpoint() : $endpoint;
+    }
+
+    /**
+     * @param  string $text
+     * @return Message
+     */
+    public static function message(string $text = null)
+    {
+        return new Message($text);
     }
 
     /**

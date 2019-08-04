@@ -13,6 +13,7 @@ use SunAsterisk\Chatwork\Endpoints\Rooms;
 use SunAsterisk\Chatwork\Endpoints\Room;
 use SunAsterisk\Chatwork\Endpoints\IncomingRequests;
 use SunAsterisk\Chatwork\Exceptions\APIException;
+use SunAsterisk\Chatwork\Helpers\Message;
 
 class ChatworkTest extends TestCase
 {
@@ -24,6 +25,13 @@ class ChatworkTest extends TestCase
         $api = new Chatwork($this->getAuth());
         $endpoint = $api->$method(...$args);
         $this->assertInstanceOf($endpointClassname, $endpoint);
+    }
+
+    public function testMessageHelper()
+    {
+        $message = Chatwork::message('Hi there');
+        $this->assertInstanceOf(Message::class, $message);
+        $this->assertEquals('Hi there', $message->toString());
     }
 
     public function testRequest()
