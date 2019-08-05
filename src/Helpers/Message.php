@@ -10,7 +10,7 @@ class Message
 
     public function __construct(string $text = null)
     {
-        $this->body = $text ?: "";
+        $this->body = $text ?: '';
     }
 
     public function __toString()
@@ -66,7 +66,7 @@ class Message
      */
     public function infoStart(string $title = null)
     {
-        $this->body .= "[info]";
+        $this->body .= '[info]';
         if ($title) {
             $this->body .= "[title]{$title}[/title]";
         }
@@ -79,7 +79,7 @@ class Message
      */
     public function infoEnd()
     {
-        $this->body .= "[/info]";
+        $this->body .= '[/info]';
 
         return $this;
     }
@@ -156,7 +156,7 @@ class Message
      */
     public function quoteStart($accountId, DateTime $time = null)
     {
-        $timestamp = $time ? " time={$time->getTimestamp()}" : "";
+        $timestamp = $time ? " time={$time->getTimestamp()}" : '';
         $this->body .= "[qt][qtmeta aid={$accountId}{$timestamp}]";
 
         return $this;
@@ -167,7 +167,7 @@ class Message
      */
     public function quoteEnd()
     {
-        $this->body .= "[/qt]";
+        $this->body .= '[/qt]';
 
         return $this;
     }
