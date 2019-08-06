@@ -61,3 +61,13 @@ You can also access it via a static method of the `Chatwork` class.
 ```php
 $message = Chatwork::message('Hi there');
 ```
+
+## Verify webhook payload
+
+There's also a helper for verifying the webhook payload signature.
+
+```php
+use SunAsterisk\Chatwork\Helpers\Webhook;
+
+$isValid = Webhook::verifySignature($yourWebhookToken, $requestBody, $signature);
+```
