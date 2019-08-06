@@ -1,11 +1,20 @@
 # Chatwork PHP API client library
 
 [![Build Status](https://travis-ci.org/sun-asterisk-research/chatwork-php.svg?branch=master)](https://travis-ci.org/sun-asterisk-research/chatwork-php)
+[![Latest Stable Version](https://poser.pugx.org/sun-asterisk/chatwork-php/v/stable)](https://packagist.org/packages/sun-asterisk/chatwork-php)
 
 ## Requirement
 
 - PHP >= 7.0
 - PHP cURL
+
+## Installation
+
+Using composer:
+
+```sh
+composer require sun-asterisk/chatwork-php
+```
 
 ## Usage
 
