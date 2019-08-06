@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/sun-asterisk-research/chatwork-php.svg?branch=master)](https://travis-ci.org/sun-asterisk-research/chatwork-php)
 [![Latest Stable Version](https://poser.pugx.org/sun-asterisk/chatwork-php/v/stable)](https://packagist.org/packages/sun-asterisk/chatwork-php)
+[![Codecov](https://img.shields.io/codecov/c/github/sun-asterisk-research/chatwork-php)](https://codecov.io/gh/sun-asterisk-research/chatwork-php)
 
 ## Requirement
 
