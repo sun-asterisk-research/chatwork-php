@@ -2,7 +2,7 @@
 
 use SunAsterisk\Chatwork\Endpoints\Contacts;
 
-class StatusTest extends TestCase
+class ContactsTest extends TestCase
 {
     public function testMe()
     {
