@@ -7,21 +7,29 @@ use SunAsterisk\Chatwork\Chatwork;
 class TestCase extends BaseTestCase
 {
     /**
+     * {@inheritdoc}
+     */
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+
+        m::close();
+    }
+
+    /**
      * @return \Mockery\MockInterface
      */
     protected function getAPIMock()
     {
-        $api = m::mock(Chatwork::class);
-
-        return $api;
+        return m::mock(Chatwork::class);
     }
 
     /**
-     * @param  string $fixture
+     * @param string $fixture
      * @return array
      */
-    protected function getMockResponse($fixture)
+    protected function getMockResponse(string $fixture)
     {
-        return require __dir__."/Fixtures/{$fixture}.php";
+        return require __DIR__."/Fixtures/{$fixture}.php";
     }
 }
