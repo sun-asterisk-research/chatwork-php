@@ -167,7 +167,7 @@ class ChatworkTest extends TestCase
 
     public function testFromApiTokenMethod()
     {
-        $chatwork = Chatwork::fromAccessToken('an-api-token');
+        $chatwork = Chatwork::fromApiToken('an-api-token');
         $this->assertInstanceOf(Chatwork::class, $chatwork);
     }
 
