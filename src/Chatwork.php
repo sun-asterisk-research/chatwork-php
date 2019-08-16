@@ -3,11 +3,13 @@
 namespace SunAsterisk\Chatwork;
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\ClientException;
 use SunAsterisk\Chatwork\Auth\Auth;
-use SunAsterisk\Chatwork\Exceptions\APIException;
-use SunAsterisk\Chatwork\Helpers\Message;
 use function GuzzleHttp\json_decode;
+use SunAsterisk\Chatwork\Auth\APIToken;
+use GuzzleHttp\Exception\ClientException;
+use SunAsterisk\Chatwork\Helpers\Message;
+use SunAsterisk\Chatwork\Auth\AccessToken;
+use SunAsterisk\Chatwork\Exceptions\APIException;
 
 /**
  * @method array me()
@@ -40,6 +42,28 @@ class Chatwork
                 'Accept' => 'application/json',
             ], $auth->getHeaders()),
         ]);
+    }
+
+    /**
+     * Create a new Chatwork client instance via an api token.
+     *
+     * @param string $token
+     * @return static
+     */
+    public static function fromApiToken(string $token)
+    {
+        return new static(new APIToken($token));
+    }
+
+    /**
+     * Create a new Chatwork client instance via an access token.
+     *
+     * @param string $token
+     * @return static
+     */
+    public static function fromAccessToken(string $token)
+    {
+        return new static(new AccessToken($token));
     }
 
     public function __call($name, $arguments)
