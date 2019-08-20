@@ -3,8 +3,9 @@
 [![Build Status](https://travis-ci.org/sun-asterisk-research/chatwork-php.svg?branch=master)](https://travis-ci.org/sun-asterisk-research/chatwork-php)
 [![Latest Stable Version](https://poser.pugx.org/sun-asterisk/chatwork-php/v/stable)](https://packagist.org/packages/sun-asterisk/chatwork-php)
 [![Codecov](https://img.shields.io/codecov/c/github/sun-asterisk-research/chatwork-php)](https://codecov.io/gh/sun-asterisk-research/chatwork-php)
+![GitHub](https://img.shields.io/github/license/sun-asterisk-research/chatwork-php.svg)
 
-## Requirement
+## Requirements
 
 - PHP >= 7.0
 - PHP cURL
@@ -19,29 +20,34 @@ composer require sun-asterisk/chatwork-php
 
 ## Usage
 
-First register an API Token [here](https://www.chatwork.com/service/packages/chatwork/subpackages/api/token.php).
+You may register an API Token [here](https://www.chatwork.com/service/packages/chatwork/subpackages/api/token.php).
 
-Here're some basic usage.
+Create a chatwork client with an api token or an access token:
 
 ```php
-// Create an authentication object, authentication using API token and OAuth access token are supported
-$auth = new SunAsterisk\Chatwork\Auth\APIToken('your token');
 
-// Create an API client instance
-$chatwork = new SunAsterisk\Chatwork\Chatwork($auth);
+use SunAsterisk\Chatwork\Chatwork;
 
-// Call the API you need
+$chatwork = Chatwork::withAPIToken('your-api-token');
+
+// $chatwork = Chatwork::withAccessToken('your-access-token');
+```
+
+Use chatwork client methods as these examples below:
+
+```php
+
+// Get your personal information.
 $me = $chatwork->me();
 
-print_r($me);
+// Get your personal tasks.
+$tasks = $chatwork->my()->tasks();
+
+// Get members in a room.
+$members = $chatwork->room($roomId)->members();
 ```
 
 API methods are organized similar to the [official API doc](http://developer.chatwork.com/ja/endpoints.html) e.g.
-
-```php
-$tasks = $chatwork->my()->tasks();
-$messages = $chatwork->room($roomId)->members();
-```
 
 ## Message builder
 

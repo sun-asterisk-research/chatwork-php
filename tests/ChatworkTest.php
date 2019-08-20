@@ -165,6 +165,18 @@ class ChatworkTest extends TestCase
         $this->assertContains('secret', $request->getHeader('X-ChatworkToken'));
     }
 
+    public function testWithAPITokenMethod()
+    {
+        $chatwork = Chatwork::withAPIToken('an-api-token');
+        $this->assertInstanceOf(Chatwork::class, $chatwork);
+    }
+
+    public function testWithAccessTokenMethod()
+    {
+        $chatwork = Chatwork::withAccessToken('an-access-token');
+        $this->assertInstanceOf(Chatwork::class, $chatwork);
+    }
+
     protected function getInstanceMock($responses, &$history)
     {
         $api = new Chatwork($this->getAuth());
