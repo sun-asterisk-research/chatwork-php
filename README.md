@@ -28,9 +28,9 @@ Create a chatwork client with an api token or an access token:
 
 use SunAsterisk\Chatwork\Chatwork;
 
-$chatwork = Chatwork::fromApiToken('your-api-token');
+$chatwork = Chatwork::withAPIToken('your-api-token');
 
-// $chatwork = Chatwork::fromAccessToken('your-access-token');
+// $chatwork = Chatwork::withAccessToken('your-access-token');
 ```
 
 Use chatwork client methods as these examples below:

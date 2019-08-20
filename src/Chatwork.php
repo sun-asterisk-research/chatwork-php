@@ -50,7 +50,7 @@ class Chatwork
      * @param string $token
      * @return static
      */
-    public static function fromApiToken(string $token)
+    public static function withAPIToken(string $token)
     {
         return new static(new APIToken($token));
     }
@@ -61,7 +61,7 @@ class Chatwork
      * @param string $token
      * @return static
      */
-    public static function fromAccessToken(string $token)
+    public static function withAccessToken(string $token)
     {
         return new static(new AccessToken($token));
     }
