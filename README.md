@@ -1,6 +1,8 @@
 # Chatwork PHP API client library
 
 [![Build Status](https://travis-ci.org/sun-asterisk-research/chatwork-php.svg?branch=master)](https://travis-ci.org/sun-asterisk-research/chatwork-php)
+[![Total Downloads](https://poser.pugx.org/sun-asterisk/chatwork-php/downloads.png)](https://packagist.org/packages/sun-asterisk/chatwork-php)
+[![Monthly Downloads](https://poser.pugx.org/sun-asterisk/chatwork-php/d/monthly.png)](https://packagist.org/packages/sun-asterisk/chatwork-php)
 [![Latest Stable Version](https://poser.pugx.org/sun-asterisk/chatwork-php/v/stable)](https://packagist.org/packages/sun-asterisk/chatwork-php)
 [![Codecov](https://img.shields.io/codecov/c/github/sun-asterisk-research/chatwork-php)](https://codecov.io/gh/sun-asterisk-research/chatwork-php)
 ![GitHub](https://img.shields.io/github/license/sun-asterisk-research/chatwork-php.svg)
