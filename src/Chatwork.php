@@ -31,11 +31,11 @@ class Chatwork
      * Create an API client
      *
      * @param Auth $auth
-     * @param string|null $proxyUrl
+     * @param array $options
      */
-    public function __construct(Auth $auth, string $proxyUrl = null)
+    public function __construct(Auth $auth, array $options = [])
     {
-        $baseUri = ($proxyUrl != null) ? $proxyUrl : static::API_URI.'/'.static::API_VERSION.'/';
+        $baseUri = $options['base_uri'] ?? static::API_URI.'/'.static::API_VERSION.'/';
 
         $this->client = new Client([
             'base_uri' => $baseUri,
@@ -50,24 +50,24 @@ class Chatwork
      * Create a new Chatwork client instance via an api token.
      *
      * @param string $token
-     * @param string|null $proxyUrl
+     * @param array $options
      * @return static
      */
-    public static function withAPIToken(string $token, string $proxyUrl = null)
+    public static function withAPIToken(string $token, array $options = [])
     {
-        return new static(new APIToken($token), $proxyUrl);
+        return new static(new APIToken($token), $options);
     }
 
     /**
      * Create a new Chatwork client instance via an access token.
      *
      * @param string $token
-     * @param string|null $proxyUrl
+     * @param array $options
      * @return static
      */
-    public static function withAccessToken(string $token, string $proxyUrl = null)
+    public static function withAccessToken(string $token, array $options = [])
     {
-        return new static(new AccessToken($token), $proxyUrl);
+        return new static(new AccessToken($token), $options);
     }
 
     public function __call($name, $arguments)
