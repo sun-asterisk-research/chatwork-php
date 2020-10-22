@@ -30,13 +30,15 @@ class Chatwork
     /**
      * Create an API client
      *
-     * @param string $apiToken
+     * @param Auth $auth
      * @param array $options
      */
-    public function __construct(Auth $auth)
+    public function __construct(Auth $auth, array $options = [])
     {
+        $baseUri = $options['base_uri'] ?? static::API_URI.'/'.static::API_VERSION.'/';
+
         $this->client = new Client([
-            'base_uri' => static::API_URI.'/'.static::API_VERSION.'/',
+            'base_uri' => $baseUri,
             'timeout' => 30,
             'headers' => array_merge([
                 'Accept' => 'application/json',
@@ -48,22 +50,24 @@ class Chatwork
      * Create a new Chatwork client instance via an api token.
      *
      * @param string $token
+     * @param array $options
      * @return static
      */
-    public static function withAPIToken(string $token)
+    public static function withAPIToken(string $token, array $options = [])
     {
-        return new static(new APIToken($token));
+        return new static(new APIToken($token), $options);
     }
 
     /**
      * Create a new Chatwork client instance via an access token.
      *
      * @param string $token
+     * @param array $options
      * @return static
      */
-    public static function withAccessToken(string $token)
+    public static function withAccessToken(string $token, array $options = [])
     {
-        return new static(new AccessToken($token));
+        return new static(new AccessToken($token), $options);
     }
 
     public function __call($name, $arguments)
